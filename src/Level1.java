@@ -1,10 +1,11 @@
-import java.util.Arrays;
-
 public class Level1 {
     public static int[] MadMax(int n, int[] Tele) {
         if (n == 1) return Tele;
 
-        int[] ma = Arrays.copyOf(Tele, Tele.length);
+        int[] ma = new int[n];
+        for (int i = 0; i < n; i++) {
+            ma[i] = Tele[i];
+        }
 
         boolean flag = true;
         while (flag) {
