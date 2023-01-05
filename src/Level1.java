@@ -1,35 +1,41 @@
 public class Level1 {
     public static int[] MadMax(int n, int[] Tele) {
-        if (n == 1) return Tele;
-
-        int[] ma = new int[n];
-        for (int i = 0; i < n; i++) {
-            ma[i] = Tele[i];
+        if (n == 1) {
+            return Tele;
         }
 
-        boolean flag = true;
-        while (flag) {
-            flag = false;
+        int[] digitsArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            digitsArray[i] = Tele[i];
+        }
+
+        // сортируем массив по возрастанию
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
 
             for (int i = 0; i < n - 1; i++) {
-                if (ma[i + 1] < ma[i]) {
-                    int t = ma[i];
+                if (digitsArray[i + 1] < digitsArray[i]) {
+                    int t = digitsArray[i];
 
-                    ma[i] = ma[i + 1];
-                    ma[i + 1] = t;
+                    digitsArray[i] = digitsArray[i + 1];
+                    digitsArray[i + 1] = t;
 
-                    flag = true;
+                    isSorted = false;
                 }
             }
         }
 
+        // сортируем массив, максимальное число в центре
+        // слева от максимального сортировка по возрастанию
+        // справа по убыванию
         for (int i = 0; i < n / 3; i++) {
-            int t = ma[n / 2 + i];
+            int t = digitsArray[n / 2 + i];
 
-            ma[n / 2 + i] = ma[n - 1 - i];
-            ma[n - 1 - i] = t;
+            digitsArray[n / 2 + i] = digitsArray[n - 1 - i];
+            digitsArray[n - 1 - i] = t;
         }
 
-        return ma;
+        return digitsArray;
     }
 }
